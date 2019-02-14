@@ -9,7 +9,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 from auditor.agent import Agent
-from auditor.scrapers.ads.base_ad_scrapers import BaseAdScraper
+from auditor.scrapers.advertisement.base_ad_scrapers import BaseAdScraper
 from auditor.scrapers.base_scraper import strip_html_tags
 
 INPUT_SELECTOR = "input[title='Search']"

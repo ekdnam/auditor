@@ -12,19 +12,19 @@ from xvfbwrapper import Xvfb
 from auditor import settings
 from auditor.ad_writer import AdWriter
 from auditor.agent import Agent
-from auditor.scrapers.ads.chicago_reader import ChicagoReaderScraper
-from auditor.scrapers.ads.chicago_tribune import ChicagoTribuneScraper
-from auditor.scrapers.ads.cnn import CNNAdScraper
-from auditor.scrapers.ads.fox_champaign import FoxChampaignScraper
-from auditor.scrapers.ads.google_search import GoogleSearchAdScraper
-from auditor.scrapers.ads.homefinder import HomeFinderAdScraper
-from auditor.scrapers.ads.news_gazette_scraper import NewsGazetteAdScraper
-from auditor.scrapers.ads.suntimes import SunTimesAdScraper
-from auditor.scrapers.ads.wcia import WCIAScraper
-from auditor.scrapers.realestate_ranking.realtor_ranking import RealtorRanking
-from auditor.scrapers.realestate_ranking.redfin_ranking import RedfinScraper
-from auditor.scrapers.realestate_ranking.trulia_ranking import TruliaScraper
-from auditor.scrapers.realestate_ranking.zillow_ranking import ZillowScraper
+from auditor.scrapers.advertisement.chicago_reader import ChicagoReaderScraper
+from auditor.scrapers.advertisement.chicago_tribune import ChicagoTribuneScraper
+from auditor.scrapers.advertisement.cnn import CNNAdScraper
+from auditor.scrapers.advertisement.fox_champaign import FoxChampaignScraper
+from auditor.scrapers.advertisement.google_search import GoogleSearchAdScraper
+from auditor.scrapers.advertisement.homefinder import HomeFinderAdScraper
+from auditor.scrapers.advertisement.news_gazette_scraper import NewsGazetteAdScraper
+from auditor.scrapers.advertisement.suntimes import SunTimesAdScraper
+from auditor.scrapers.advertisement.wcia import WCIAScraper
+from auditor.scrapers.ranking.realtor_ranking import RealtorRanking
+from auditor.scrapers.ranking.redfin_ranking import RedfinScraper
+from auditor.scrapers.ranking.trulia_ranking import TruliaScraper
+from auditor.scrapers.ranking.zillow_ranking import ZillowScraper
 
 
 def pos_int_norm(center: int, stddev: int):

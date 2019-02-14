@@ -5,21 +5,21 @@ from queue import Queue
 from selenium.common.exceptions import NoSuchElementException
 
 from auditor.agent import Agent
-from auditor.scrapers.ads.base_ad_scrapers import BaseAdScraper
+from auditor.scrapers.advertisement.base_ad_scrapers import BaseAdScraper
 
 
-class FoxChampaignScraper(BaseAdScraper):
+class ChicagoTribuneScraper(BaseAdScraper):
     logger = logging.getLogger(__name__)
 
     def __init__(self, delay: int = 30, pages: int = 1):
-        super().__init__('champaign', delay, pages)
+        super().__init__('chicago', delay, pages)
 
     def __call__(self, unit: Agent, queue: Queue):
         driver = unit.driver
         for rep in range(self.pages):
             time.sleep(self.delay)
             try:
-                driver.get("https://foxillinois.com/live/livestream-champaign")
+                driver.get("https://www.chicagotribune.com/classified/realestate/")
             except NoSuchElementException:
                 self.logger.exception("Could not load main page")
                 return

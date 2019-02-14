@@ -2,7 +2,7 @@ import logging
 
 from selenium.common.exceptions import NoSuchElementException
 
-from auditor.scrapers.ads.base_ad_scrapers import BaseAdScraper
+from auditor.scrapers.advertisement.base_ad_scrapers import BaseAdScraper
 from auditor.scrapers.base_scraper import strip_html_tags
 
 

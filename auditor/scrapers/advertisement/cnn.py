@@ -3,21 +3,21 @@ import time
 
 from selenium.common.exceptions import NoSuchElementException
 
-from auditor.scrapers.ads.base_ad_scrapers import BaseAdScraper
+from auditor.scrapers.advertisement.base_ad_scrapers import BaseAdScraper
 
 
-class SunTimesAdScraper(BaseAdScraper):
+class CNNAdScraper(BaseAdScraper):
     logger = logging.getLogger(__name__)
 
     def __init__(self, delay: int = 60, pages: int = 1):
-        super().__init__('chicago', delay, pages)
+        super().__init__('', delay, pages)
 
     def __call__(self, unit, queue):
         driver = unit.driver
         for rep in range(self.pages):
             time.sleep(self.delay)
             try:
-                driver.get("http://marketplace.suntimes.com/cst-marketplace/category/Real%20Estate")
+                driver.get("https://www.cnn.com/us")
                 ads = driver.find_elements_by_css_selector('iframe[id^="google_ads_iframe"]')
             except:
                 self.logger.exception("Could not get main page and ads")

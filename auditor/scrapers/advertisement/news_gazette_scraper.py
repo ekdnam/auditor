@@ -5,7 +5,7 @@ from queue import Queue
 from selenium.common.exceptions import NoSuchElementException
 
 from auditor.agent import Agent
-from auditor.scrapers.ads.base_ad_scrapers import BaseAdScraper
+from auditor.scrapers.advertisement.base_ad_scrapers import BaseAdScraper
 
 
 class NewsGazetteAdScraper(BaseAdScraper):

@@ -8,7 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 from auditor.agent import Agent
 from auditor.scrapers.base_scraper import strip_html_tags
-from auditor.scrapers.realestate_ranking.base_ranking_scraper import BaseRankingScraper
+from auditor.scrapers.ranking.base_ranking_scraper import BaseRankingScraper
 
 
 class TruliaScraper(BaseRankingScraper):

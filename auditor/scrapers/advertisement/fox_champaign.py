@@ -5,10 +5,10 @@ from queue import Queue
 from selenium.common.exceptions import NoSuchElementException
 
 from auditor.agent import Agent
-from auditor.scrapers.ads.base_ad_scrapers import BaseAdScraper
+from auditor.scrapers.advertisement.base_ad_scrapers import BaseAdScraper
 
 
-class WCIAScraper(BaseAdScraper):
+class FoxChampaignScraper(BaseAdScraper):
     logger = logging.getLogger(__name__)
 
     def __init__(self, delay: int = 30, pages: int = 1):
@@ -19,7 +19,7 @@ class WCIAScraper(BaseAdScraper):
         for rep in range(self.pages):
             time.sleep(self.delay)
             try:
-                driver.get("https://www.wcia.com/")
+                driver.get("https://foxillinois.com/live/livestream-champaign")
             except NoSuchElementException:
                 self.logger.exception("Could not load main page")
                 return
