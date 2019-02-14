@@ -1,0 +1,42 @@
+import logging
+import time
+from queue import Queue
+
+from selenium.common.exceptions import NoSuchElementException
+
+from auditor.agent import Agent
+from auditor.scrapers.ads.base_ad_scrapers import BaseAdScraper
+
+
+class WCIAScraper(BaseAdScraper):
+    logger = logging.getLogger(__name__)
+
+    def __init__(self, delay: int = 30, pages: int = 1):
+        super().__init__('champaign', delay, pages)
+
+    def __call__(self, unit: Agent, queue: Queue):
+        driver = unit.driver
+        for rep in range(self.pages):
+            time.sleep(self.delay)
+            try:
+                driver.get("https://www.wcia.com/")
+            except NoSuchElementException:
+                self.logger.exception("Could not load main page")
+                return
+
+            try:
+                ads = driver.find_elements_by_css_selector('iframe[id^="google_ads_iframe"]')
+                for ad in ads:
+                    try:
+                        ad_filename = self.screenshot_elem(driver, ad)
+                        self.log_scraped_ad(queue, unit, self, {
+                            "image_path": ad_filename,
+                        })
+                    except NoSuchElementException:
+                        self.logger.info("Malformed ad")
+            except NoSuchElementException:
+                self.logger.exception("Could not get ads")
+
+
+
+
