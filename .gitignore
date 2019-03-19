@@ -3,6 +3,7 @@ bkp
 gis info
 collected_ads
 *.nb.html
+output/**/*.png
 
 # Created by .ignore support plugin (hsz.mobi)
 ### JetBrains template
@@ -210,3 +211,5 @@ vignettes/*.pdf
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 
+packrat/lib*/
+packrat/src/
