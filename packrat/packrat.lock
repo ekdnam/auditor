@@ -141,6 +141,12 @@ Source: CRAN
 Version: 1.4-1
 Hash: 60a56e9998b8b58ee378db3dc91b27a5
 
+Package: conflicted
+Source: CRAN
+Version: 1.0.1
+Hash: c2ba20a1a5d1e1614c288c18cb7b899d
+Requires: memoise, rlang
+
 Package: crayon
 Source: CRAN
 Version: 1.3.4
@@ -321,6 +327,17 @@ Source: CRAN
 Version: 1.5
 Hash: bdc4d48c3135e8f3b399536ddf160df4
 
+Package: mapdata
+Source: CRAN
+Version: 2.3.0
+Hash: 57ad2ddcd83c244bba047189a8bb6476
+Requires: maps
+
+Package: maps
+Source: CRAN
+Version: 3.3.0
+Hash: 0815ed94aca05c7aeb177ebddd4ee23b
+
 Package: maptools
 Source: CRAN
 Version: 0.9-5
@@ -332,6 +349,12 @@ Source: CRAN
 Version: 0.9
 Hash: 730f688930cef3223d59bd8aef679ab9
 Requires: mime
+
+Package: memoise
+Source: CRAN
+Version: 1.1.0
+Hash: 410fcd334bc626db100237cc1370f2e9
+Requires: digest
 
 Package: mime
 Source: CRAN
@@ -451,6 +474,12 @@ Source: CRAN
 Version: 5.38
 Hash: 80e9edd049e34ea6496f6e4d2640d3e0
 Requires: MatrixModels, SparseM
+
+Package: raster
+Source: CRAN
+Version: 2.8-19
+Hash: 33d7bac6425400dd23597f866a01f25e
+Requires: Rcpp, sp
 
 Package: readr
 Source: CRAN
