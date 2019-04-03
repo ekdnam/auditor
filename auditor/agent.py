@@ -100,3 +100,6 @@ class Agent(object):
         self.logger.info("Started scraping")
         for step in self.scrape_steps:
             step(self, queue)
+
+    def quit(self):
+        self.driver.quit()

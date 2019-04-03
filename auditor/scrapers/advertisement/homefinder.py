@@ -1,6 +1,7 @@
 import logging
 import time
 from queue import Queue
+from datetime import datetime
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
@@ -30,6 +31,8 @@ class HomeFinderAdScraper(BaseAdScraper):
                     .pause(1) \
                     .send_keys_to_element(search_bar, self.query) \
                     .send_keys_to_element(search_bar, Keys.RETURN) \
+                    .send_keys_to_element(search_bar, Keys.RETURN) \
+                    .pause(5) \
                     .perform()
             except NoSuchElementException:
                 self.logger.exception("Could not load main page")
@@ -39,21 +42,25 @@ class HomeFinderAdScraper(BaseAdScraper):
             try:
                 frame = driver.find_element_by_css_selector('div#adSenseForSearchRightRail iframe')
                 driver.switch_to.frame(frame)
-                ads = driver.find_element_by_css_selector('div#adBlock div.a_')
-                for ad in ads:
-                    parsed_ad = dict()
-                    parsed_ad['url'] = strip_html_tags(
-                        ad.find_element_by_css_selector("a.test_domainLink").get_attribute('innerHTML'))
-                    parsed_ad['title'] = strip_html_tags(
-                        ad.find_element_by_css_selector("a.test_titleLink").get_attribute('innerHTML'))
-                    parsed_ad['body'] = strip_html_tags(
-                        ad.find_element_by_css_selector("span.descText").get_attribute('innerHTML'))
+                ad = driver.find_element_by_css_selector('div#adBlock div.a_')
+                parsed_ad = dict()
+                parsed_ad['url'] = strip_html_tags(
+                    ad.find_element_by_css_selector("a.test_domainLink").get_attribute('innerHTML'))
+                parsed_ad['title'] = strip_html_tags(
+                    ad.find_element_by_css_selector("a.test_titleLink").get_attribute('innerHTML'))
+                parsed_ad['body'] = strip_html_tags(
+                    ad.find_element_by_css_selector("span.descText").get_attribute('innerHTML'))
+                try:
                     parsed_ad['additional'] = strip_html_tags(
                         ad.find_element_by_css_selector('div.hd_').get_attribute('innerHTML'))
-                    self.log_scraped_ad(queue, unit, self, parsed_ad)
-                    self.logger.debug("Complete ad: %s", ad.get_attribute('outerHTML'))
+                except NoSuchElementException:
+                    pass
+                self.log_scraped_ad(queue, unit, self, parsed_ad)
+                self.logger.debug("Complete ad: %s", ad.get_attribute('outerHTML'))
             except NoSuchElementException:
-                self.logger.exception("Could not get sidebar ads")
+                name = f"output/failures/{datetime.now()}.png"
+                self.logger.exception(f"Could not get sidebar ads: {name}")
+                unit.driver.save_screenshot(name)
             finally:
                 driver.switch_to.default_content()
 
@@ -71,14 +78,19 @@ class HomeFinderAdScraper(BaseAdScraper):
                             ad.find_element_by_css_selector("a.test_titleLink").get_attribute('innerHTML'))
                         parsed_ad['body'] = strip_html_tags(
                             ad.find_element_by_css_selector("span.descText").get_attribute('innerHTML'))
-                        parsed_ad['additional'] = strip_html_tags(
-                            ad.find_element_by_css_selector('div.hd_').get_attribute('innerHTML'))
+                        try:
+                            parsed_ad['additional'] = strip_html_tags(
+                                ad.find_element_by_css_selector('div.hd_').get_attribute('innerHTML'))
+                        except NoSuchElementException:
+                            pass
                         self.log_scraped_ad(queue, unit, self, parsed_ad)
                         self.logger.debug("Complete ad: %s", ad.get_attribute('outerHTML'))
                     except NoSuchElementException:
                         self.logger.exception("Could not scrape ad: %s", ad.get_attribute('outerHTML'))
                 driver.switch_to.default_content()
             except NoSuchElementException:
-                self.logger.exception("Could not get main page and ads")
+                name = f"output/failures/{datetime.now()}.png"
+                self.logger.exception(f"Could not get main page and ads: {name}")
+                unit.driver.save_screenshot(name)
             finally:
                 driver.switch_to.default_content()

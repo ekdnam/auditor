@@ -35,7 +35,7 @@ class RealtorRanking(BaseRankingScraper):
         RealtorRanking.extract_elem(driver, record, "price", ad, "span.data-price")
         RealtorRanking.extract_elem(driver, record, "beds", ad, "li[data-label='property-meta-beds'] span")
         RealtorRanking.extract_elem(driver, record, "baths", ad, "li[data-label='property-meta-baths'] span")
-        RealtorRanking.extract_elem(driver, record, "square feet", ad, "li[data-label='property-meta-sqft'] span")
+        # RealtorRanking.extract_elem(driver, record, "square feet", ad, "li[data-label='property-meta-sqft'] span")
         RealtorRanking.extract_elem(driver, record, "street address", ad, "div[data-label='property-address'] span.listing-street-address")
         RealtorRanking.extract_elem(driver, record, "locality", ad, "div[data-label='property-address'] span.listing-city")
         RealtorRanking.extract_elem(driver, record, "region", ad, "div[data-label='property-address'] span.listing-region")
