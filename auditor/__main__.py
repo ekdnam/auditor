@@ -7,7 +7,6 @@ from typing import List
 
 import click
 import numpy as np
-from pushover import Client
 from xvfbwrapper import Xvfb
 from datetime import datetime
 
@@ -106,7 +105,6 @@ def main(output, agents, blocks, location, debug):
     )
     logging.getLogger("selenium.webdriver").setLevel(logging.WARNING)
     logger = logging.getLogger(__name__)
-    pushover_client = Client(settings.PUSHOVER_USERKEY, api_token=settings.PUSHOVER_TOKEN)
 
     treatments: List[Agent] = list()
     with Xvfb(width=1280, height=740) as xvfb:
@@ -184,12 +182,12 @@ def main(output, agents, blocks, location, debug):
                     writer.queue.put(None)
                     writer.join()
                 except Exception as ex:
-                    pushover_client.send_message("Error encountered in experiment")
+                    print('Exception occurred: ', str(ex))
                 finally:
                     for treatment in treatments:
                         treatment.driver.quit()
                     logger.info("Completed block %s", block)
-            pushover_client.send_message("Successfully finished an experiment")
+            print('Experiment completed successfully')
             logger.info("Completed measurement")
         except (Exception, KeyboardInterrupt):
             try:
