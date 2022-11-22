@@ -213,3 +213,7 @@ rsconnect/
 
 packrat/lib*/
 packrat/src/
+
+/*__pycache__*/
+
+.DS_Store

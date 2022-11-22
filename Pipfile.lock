@@ -260,13 +260,6 @@
             "index": "pypi",
             "version": "==0.10.1"
         },
-        "python-pushover": {
-            "hashes": [
-                "sha256:dee1b1344fb8a5874365fc9f886d9cbc7775536629999be54dfa60177cf80810"
-            ],
-            "index": "pypi",
-            "version": "==0.4"
-        },
         "pywavelets": {
             "hashes": [
                 "sha256:01683797c855d10d9ee78f46272b99b02f70a474e35baa54d150a385be9a9253",

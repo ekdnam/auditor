@@ -16,8 +16,7 @@ setup(
         'numpy',
         'imagehash',
         'Pillow',
-        'python-dotenv',
-        'python-pushover',
+        'python-dotenv'
     ],
 
 )
