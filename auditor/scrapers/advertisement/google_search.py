@@ -4,6 +4,9 @@ from datetime import datetime
 from queue import Queue
 from threading import Semaphore
 
+import codecs
+import os
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -23,6 +26,7 @@ class GoogleSearchAdScraper(BaseAdScraper):
 
     def __init__(self, query: str, delay: int, pages: int = 3):
         super().__init__(query, delay, pages)
+        self.name = 'GoogleSearchAdScraper'
 
     def __call__(self, unit: Agent, queue: Queue):
         def save_screenshot(driver, path: str = '/tmp/screenshot.png') -> None:
@@ -34,6 +38,16 @@ class GoogleSearchAdScraper(BaseAdScraper):
             # driver.save_screenshot(path)  # has scrollbar
             driver.find_element_by_tag_name('body').screenshot(path)  # avoids scrollbar
             driver.set_window_size(original_size['width'], original_size['height'])
+
+        def save_file(driver, folder, filename):
+            # Ref: https://www.tutorialspoint.com/save-a-web-page-with-python-selenium
+            save_path = f'{os.getcwd()}/{folder}'
+            if not os.path.exists(save_path):
+                os.mkdir(os.path.join(os.getcwd(), folder))
+            n = os.path.join(save_path,filename + '.html')
+            f = codecs.open(n, "w", "utf−8")
+            h = driver.page_source
+            f.write(h)
 
         with GoogleSearchAdScraper.scrape_lock:
             driver = unit.driver
@@ -56,8 +70,9 @@ class GoogleSearchAdScraper(BaseAdScraper):
                     return
                 # ss = Screenshot_Clipping.Screenshot()
                 # image = ss.full_Screenshot(driver, save_path=r'.' , image_name=f'{i}.png')
-                self.logger.info('Taking screenoshot')
-                save_screenshot(driver, path=f'{i}.png')
+
+                self.logger.info('Save file')
+                save_file(driver, 'output-html', 'results')
                 i += 1
                 ads = driver.find_elements_by_css_selector("li.ads-ad")
                 # for ad in ads:

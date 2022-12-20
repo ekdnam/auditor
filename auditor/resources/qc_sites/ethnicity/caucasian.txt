@@ -1,14 +1,2 @@
 whitepages.com
-definition.org
-topixoffbeat.com
-kiwireport.com
-worldlifestyle.com
-startribune.com
-cheatsheet.com
-hometalk.com
-westernjournal.com
-findagrave.com
-yourdailydish.com
-petfinder.com
-gardeningknowhow.com
-dailykos.com
+
