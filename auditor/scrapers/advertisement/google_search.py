@@ -90,11 +90,11 @@ class GoogleSearchAdScraper(BaseAdScraper):
                 #         driver.save_screenshot('ss.png')
                 #     except NoSuchElementException:
                 #         self.logger.exception("Unparseable ad: %s", ad.get_attribute('outerHTML'))
-                try:
-                    driver.execute_script("arguments[0].scrollIntoView();",
-                                          driver.find_element_by_css_selector("#pnnext"))
-                    driver.find_element_by_css_selector("#pnnext").click()
-                except NoSuchElementException:
-                    filename = str(datetime.now()) + '.screenie.png'
-                    driver.save_screenshot(filename)
-                    self.logger.exception("Element not found: %s", filename)
+                # try:
+                #     driver.execute_script("arguments[0].scrollIntoView();",
+                #                           driver.find_element_by_css_selector("#pnnext"))
+                #     driver.find_element_by_css_selector("#pnnext").click()
+                # except NoSuchElementException:
+                #     filename = str(datetime.now()) + '.screenie.png'
+                #     driver.save_screenshot(filename)
+                #     self.logger.exception("Element not found: %s", filename)
