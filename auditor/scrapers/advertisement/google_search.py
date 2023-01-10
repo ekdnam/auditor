@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 from queue import Queue
 from threading import Semaphore
-
+import uuid
 import codecs
 import os
 
@@ -71,8 +71,16 @@ class GoogleSearchAdScraper(BaseAdScraper):
                 # ss = Screenshot_Clipping.Screenshot()
                 # image = ss.full_Screenshot(driver, save_path=r'.' , image_name=f'{i}.png')
 
+
+                # query file names to build data structure
+                # ref: https://stackoverflow.com/questions/10607688/how-to-create-a-file-name-with-the-current-date-time-in-python 
+                time_stamp = time.strftime("%Y%m%d-%H%M%S")
+                query_ID = str(uuid.uuid4())
+                agent_ID = ""
+                file_name = agent_ID + "_" + time_stamp + "_" + query_ID
+
                 self.logger.info('Save file')
-                save_file(driver, 'output-html', 'results')
+                save_file(driver, file_name, 'results')
                 i += 1
                 ads = driver.find_elements_by_css_selector("li.ads-ad")
                 # for ad in ads:
