@@ -40,15 +40,15 @@ def generate_qc_agents(proxy_config=None):
     from auditor.treatments.qc.ethnicity import apply_hispanic_treatment
     from auditor.treatments.qc.ethnicity import apply_asian_treatment
     return [
-        # apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
-        # apply_caucasian_treatment(apply_female_treatment(Agent("caucasian-female", proxy=proxy_config))),
-        # apply_afam_treatment(apply_male_treatment(Agent("afam-male", proxy=proxy_config))),
-        # apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
+        apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
+        apply_caucasian_treatment(apply_female_treatment(Agent("caucasian-female", proxy=proxy_config))),
+        apply_afam_treatment(apply_male_treatment(Agent("afam-male", proxy=proxy_config))),
+        apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
         # apply_hispanic_treatment(apply_male_treatment(Agent("hispanic-male", proxy=proxy_config))),
         # apply_hispanic_treatment(apply_female_treatment(Agent("hispanic-female", proxy=proxy_config))),
         # apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
         # apply_asian_treatment(apply_female_treatment(Agent("asian-female", proxy=proxy_config))),
-        apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config)))
+        # apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config)))
     ]
 
 
