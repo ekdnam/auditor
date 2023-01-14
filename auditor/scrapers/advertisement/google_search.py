@@ -73,14 +73,15 @@ class GoogleSearchAdScraper(BaseAdScraper):
 
 
                 # query file names to build data structure
-                # ref: https://stackoverflow.com/questions/10607688/how-to-create-a-file-name-with-the-current-date-time-in-python 
+                # ref: https://stackoverflow.com/questions/10607688/how-to-create-a-file-name-with-the-current-date-time-in-python
+                # https://stackoverflow.com/questions/10501247/best-way-to-generate-random-file-names-in-python 
                 time_stamp = time.strftime("%Y%m%d-%H%M%S")
                 query_ID = str(uuid.uuid4())
                 agent_ID = ""
                 file_name = agent_ID + "_" + time_stamp + "_" + query_ID
 
                 self.logger.info('Save file')
-                save_file(driver, file_name, 'results')
+                save_file(driver, 'outputs-html',file_name)
                 i += 1
                 ads = driver.find_elements_by_css_selector("li.ads-ad")
                 # for ad in ads:
