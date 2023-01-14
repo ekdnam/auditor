@@ -48,7 +48,7 @@ def generate_qc_agents(proxy_config=None):
         # apply_hispanic_treatment(apply_female_treatment(Agent("hispanic-female", proxy=proxy_config))),
         # apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
         # apply_asian_treatment(apply_female_treatment(Agent("asian-female", proxy=proxy_config))),
-        # apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config)))
+        apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config)))
     ]
 
 
