@@ -77,12 +77,12 @@ class GoogleSearchAdScraper(BaseAdScraper):
                 # https://stackoverflow.com/questions/10501247/best-way-to-generate-random-file-names-in-python 
                 time_stamp = time.strftime("%Y%m%d-%H%M%S")
                 query_ID = str(uuid.uuid4())
-                agent_ID = ""
-                file_name = agent_ID + "_" + time_stamp + "_" + query_ID
-                self.logger.info(unit.agent_id)
-                self.logger.info(unit.treatment_id)
+                agent_ID = unit.agent_id + "___" +unit.treatment_id
+                file_name = agent_ID + "___" + time_stamp + "___" + query_ID
+                # self.logger.info(unit.agent_id)
+                # self.logger.info(unit.treatment_id)
                 self.logger.info('Save file')
-                save_file(driver, 'outputs-html',file_name)
+                save_file(driver, 'output-html', file_name)
                 i += 1
                 ads = driver.find_elements_by_css_selector("li.ads-ad")
                 # for ad in ads:
