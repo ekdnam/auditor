@@ -79,7 +79,8 @@ class GoogleSearchAdScraper(BaseAdScraper):
                 query_ID = str(uuid.uuid4())
                 agent_ID = ""
                 file_name = agent_ID + "_" + time_stamp + "_" + query_ID
-                self.logger.info(unit)
+                self.logger.info(unit.agent_id)
+                self.logger.info(unit.treatment_id)
                 self.logger.info('Save file')
                 save_file(driver, 'outputs-html',file_name)
                 i += 1
