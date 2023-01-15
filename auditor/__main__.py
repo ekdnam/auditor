@@ -172,18 +172,18 @@ def main(output, agents, blocks, location, debug):
                             shuffle(agent.training_steps)
                             shuffle(agent.scrape_steps)
 
-                    queue = Queue()
-                    writer = AdWriter(output, queue)
+                        queue = Queue()
+                        writer = AdWriter(output, queue)
 
-                    logger.info("Starting threads")
-                    threads = [Thread(target=unit.run, args=(writer.queue,)) for unit in treatments]
-                    for t in threads:
-                        t.start()
-                    writer.start()
-                    for t in threads:
-                        t.join()
-                    writer.queue.put(None)
-                    writer.join()
+                        logger.info("Starting threads")
+                        threads = [Thread(target=unit.run, args=(writer.queue,)) for unit in treatments]
+                        for t in threads:
+                            t.start()
+                        writer.start()
+                        for t in threads:
+                            t.join()
+                        writer.queue.put(None)
+                        writer.join()
                 except Exception as ex:
                     print('Exception occurred: ', str(ex))
                 finally:
