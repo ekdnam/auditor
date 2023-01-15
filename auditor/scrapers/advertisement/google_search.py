@@ -24,7 +24,7 @@ class GoogleSearchAdScraper(BaseAdScraper):
     logger = logging.getLogger(__name__)
     scrape_lock = Semaphore(2)
 
-    def __init__(self, query: str, delay: int, pages: int = 3):
+    def __init__(self, query: str, delay: int, pages: int = 1):
         super().__init__(query, delay, pages)
         self.name = 'GoogleSearchAdScraper'
 
@@ -85,6 +85,10 @@ class GoogleSearchAdScraper(BaseAdScraper):
                 save_file(driver, 'output-html', file_name)
                 i += 1
                 ads = driver.find_elements_by_css_selector("li.ads-ad")
+
+
+
+
                 # for ad in ads:
                 #     try:
                 #         title = ad.find_element_by_css_selector('div.ad_cclk a:not([style*="display:none"])').text

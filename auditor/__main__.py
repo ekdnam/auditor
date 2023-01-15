@@ -41,9 +41,11 @@ def generate_qc_agents(proxy_config=None):
     from auditor.treatments.qc.ethnicity import apply_asian_treatment
     return [
         apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
-        #apply_caucasian_treatment(apply_female_treatment(Agent("caucasian-female", proxy=proxy_config))),
-        #apply_afam_treatment(apply_male_treatment(Agent("afam-male", proxy=proxy_config))),
-        #apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
+        apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
+        apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
+        # apply_caucasian_treatment(apply_female_treatment(Agent("caucasian-female", proxy=proxy_config))),
+        # apply_afam_treatment(apply_male_treatment(Agent("afam-male", proxy=proxy_config))),
+        # apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
         # apply_hispanic_treatment(apply_male_treatment(Agent("hispanic-male", proxy=proxy_config))),
         # apply_hispanic_treatment(apply_female_treatment(Agent("hispanic-female", proxy=proxy_config))),
         # apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
@@ -122,49 +124,50 @@ def main(output, agents, blocks, location, debug):
                         # treatments.extend(generate_test_agent(proxy_config=proxy_config))
 
                     logger.info("Adding scrape steps")
-                    for treatment in treatments:
-                        scrape_steps = {
-                            'champaign': [
-                                # CNNAdScraper(delay=pos_int_norm(40, 12)),
-                                # CNNAdScraper(delay=pos_int_norm(40, 12)),
-                                # NewsGazetteAdScraper(),
-                                # NewsGazetteAdScraper(),
-                                # FoxChampaignScraper(),
-                                # FoxChampaignScraper(),
-                                # WCIAScraper(),
-                                # WCIAScraper(),
-                                GoogleSearchAdScraper('houses in champaign', delay=pos_int_norm(40, 12))
-                                # HomeFinderAdScraper('Urbana, IL', delay=pos_int_norm(40, 12)),
-                                # TruliaScraper('Champaign, IL', delay=pos_int_norm(600, 120)),
-                                # RealtorRanking('Champaign, IL', delay=10),
-                                # RedfinScraper('county/721/IL/Champaign-County', delay=300),
-                            ],
-                            'chicago': [
-                                # CNNAdScraper(),
-                                # CNNAdScraper(),
-                                # ChicagoReaderScraper(delay=pos_int_norm(40, 12)),
-                                # ChicagoReaderScraper(delay=pos_int_norm(40, 12)),
-                                # SunTimesAdScraper(),
-                                # SunTimesAdScraper(),
-                                # ChicagoTribuneScraper(),
-                                # ChicagoTribuneScraper(),
-                                GoogleSearchAdScraper('houses in chicago', delay=pos_int_norm(40, 12))
-                                # HomeFinderAdScraper('Chicago, IL', delay=pos_int_norm(40, 12)),
-                                # RealtorRanking('Chicago, IL', delay=300),
-                                # TruliaScraper('Chicago, IL', delay=pos_int_norm(600, 120)),
-                                # RedfinScraper('city/29470/IL/Chicago', delay=300),
-                            ],
-                            'atlanta': [
-                                RealtorRanking('Atlanta, GA', delay=300),
-                                TruliaScraper('Atlanta, GA', delay=pos_int_norm(600, 120)),
-                            ],
-                            'sacramento': [
-                                RealtorRanking('Sacramento, CA', delay=300),
-                                TruliaScraper('Sacramento, CA', delay=pos_int_norm(600, 120)),
-                            ],
-                        }
+                    for i in range(0,2,1):
+                        for treatment in treatments:
+                            scrape_steps = {
+                                'champaign': [
+                                    # CNNAdScraper(delay=pos_int_norm(40, 12)),
+                                    # CNNAdScraper(delay=pos_int_norm(40, 12)),
+                                    # NewsGazetteAdScraper(),
+                                    # NewsGazetteAdScraper(),
+                                    # FoxChampaignScraper(),
+                                    # FoxChampaignScraper(),
+                                    # WCIAScraper(),
+                                    # WCIAScraper(),
+                                    GoogleSearchAdScraper('houses in champaign', delay=pos_int_norm(40, 12))
+                                    # HomeFinderAdScraper('Urbana, IL', delay=pos_int_norm(40, 12)),
+                                    # TruliaScraper('Champaign, IL', delay=pos_int_norm(600, 120)),
+                                    # RealtorRanking('Champaign, IL', delay=10),
+                                    # RedfinScraper('county/721/IL/Champaign-County', delay=300),
+                                ],
+                                'chicago': [
+                                    # CNNAdScraper(),
+                                    # CNNAdScraper(),
+                                    # ChicagoReaderScraper(delay=pos_int_norm(40, 12)),
+                                    # ChicagoReaderScraper(delay=pos_int_norm(40, 12)),
+                                    # SunTimesAdScraper(),
+                                    # SunTimesAdScraper(),
+                                    # ChicagoTribuneScraper(),
+                                    # ChicagoTribuneScraper(),
+                                    GoogleSearchAdScraper('houses in chicago', delay=pos_int_norm(40, 12))
+                                    # HomeFinderAdScraper('Chicago, IL', delay=pos_int_norm(40, 12)),
+                                    # RealtorRanking('Chicago, IL', delay=300),
+                                    # TruliaScraper('Chicago, IL', delay=pos_int_norm(600, 120)),
+                                    # RedfinScraper('city/29470/IL/Chicago', delay=300),
+                                ],
+                                'atlanta': [
+                                    RealtorRanking('Atlanta, GA', delay=300),
+                                    TruliaScraper('Atlanta, GA', delay=pos_int_norm(600, 120)),
+                                ],
+                                'sacramento': [
+                                    RealtorRanking('Sacramento, CA', delay=300),
+                                    TruliaScraper('Sacramento, CA', delay=pos_int_norm(600, 120)),
+                                ],
+                            }
 
-                        treatment.scrape_steps.extend(scrape_steps[location])
+                            treatment.scrape_steps.extend(scrape_steps[location])
 
                     for agent in treatments:
                         shuffle(agent.training_steps)
