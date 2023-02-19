@@ -23,7 +23,8 @@ class SiteVisitor(TrainingStep):
                 url = url._replace(scheme='https')
             try:
                 print("Accessing url")
-                print(url)
+                print("URL object: ", url)
+                print("URL: ", url.geturl())
                 unit.driver.get(url.geturl())
             except TimeoutException:
                 self.logger.info("Site '%s' timeout", url.geturl())
