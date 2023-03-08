@@ -25,3 +25,7 @@ pip install --editable . -r requirements.txt
 sudo apt install firefox-geckodriver
 
 # download vpn
+sudo apt-get install openvpn unzip
+cd /etc/openvpn
+sudo wget https://my.surfshark.com/vpn/api/v1/server/configurations
+sudo unzip configurations
