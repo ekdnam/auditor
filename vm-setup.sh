@@ -29,3 +29,7 @@ sudo apt-get install openvpn unzip
 cd /etc/openvpn
 sudo wget https://my.surfshark.com/vpn/api/v1/server/configurations
 sudo unzip configurations
+sudo wget https://ocean.surfshark.com/debian/pool/main/s/surfshark-release/surfshark-release_1.0.0-2.1_amd64.deb
+sudo dpkg -i surfshark-release_1.0.0-2.1_amd64.deb
+sudo apt-get update
+sudo apt-get install surfshark-vpn
