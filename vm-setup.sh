@@ -20,3 +20,8 @@ sudo apt-get install xvfb
 
 # install depedencies
 pip install --editable . -r requirements.txt
+
+# fix a geckodriver issue
+sudo apt install firefox-geckodriver
+
+# download vpn
