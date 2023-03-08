@@ -165,7 +165,6 @@ def main(output, agents, blocks, location, debug):
                         }
 
                         treatment.scrape_steps.extend(scrape_steps[location])
-                        
                     start_time = time.time()
                     while ((time.time() - start_time) < 86400):
                     #for i in range(3):
