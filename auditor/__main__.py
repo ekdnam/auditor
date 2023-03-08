@@ -9,6 +9,7 @@ import click
 import numpy as np
 from xvfbwrapper import Xvfb
 from datetime import datetime
+import time
 
 from auditor import settings
 from auditor.ad_writer import AdWriter
@@ -41,16 +42,13 @@ def generate_qc_agents(proxy_config=None):
     from auditor.treatments.qc.ethnicity import apply_asian_treatment
     return [
         apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
-        apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
-        apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
-        # apply_caucasian_treatment(apply_female_treatment(Agent("caucasian-female", proxy=proxy_config))),
-        # apply_afam_treatment(apply_male_treatment(Agent("afam-male", proxy=proxy_config))),
-        # apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
-        # apply_hispanic_treatment(apply_male_treatment(Agent("hispanic-male", proxy=proxy_config))),
-        # apply_hispanic_treatment(apply_female_treatment(Agent("hispanic-female", proxy=proxy_config))),
-        # apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
-        # apply_asian_treatment(apply_female_treatment(Agent("asian-female", proxy=proxy_config))),
-        apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config)))
+        apply_caucasian_treatment(apply_female_treatment(Agent("caucasian-female", proxy=proxy_config))),
+        apply_afam_treatment(apply_male_treatment(Agent("afam-male", proxy=proxy_config))),
+        apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
+        apply_hispanic_treatment(apply_male_treatment(Agent("hispanic-male", proxy=proxy_config))),
+        apply_hispanic_treatment(apply_female_treatment(Agent("hispanic-female", proxy=proxy_config))),
+        apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
+        apply_asian_treatment(apply_female_treatment(Agent("asian-female", proxy=proxy_config))),
     ]
 
 
@@ -135,7 +133,7 @@ def main(output, agents, blocks, location, debug):
                                 # FoxChampaignScraper(),
                                 # WCIAScraper(),
                                 # WCIAScraper(),
-                                GoogleSearchAdScraper('houses in champaign', delay=pos_int_norm(40, 12))
+                                GoogleSearchAdScraper('work from home jobs', delay=pos_int_norm(40, 12))
                                 # HomeFinderAdScraper('Urbana, IL', delay=pos_int_norm(40, 12)),
                                 # TruliaScraper('Champaign, IL', delay=pos_int_norm(600, 120)),
                                 # RealtorRanking('Champaign, IL', delay=10),
@@ -167,7 +165,10 @@ def main(output, agents, blocks, location, debug):
                         }
 
                         treatment.scrape_steps.extend(scrape_steps[location])
-                    for i in range(3):
+                        
+                    start_time = time.time()
+                    while ((time.time() - start_time) < 86400):
+                    #for i in range(3):
                         for agent in treatments:
                             shuffle(agent.training_steps)
                             shuffle(agent.scrape_steps)
