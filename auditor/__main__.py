@@ -42,13 +42,13 @@ def generate_qc_agents(proxy_config=None):
     from auditor.treatments.qc.ethnicity import apply_asian_treatment
     return [
         apply_caucasian_treatment(apply_male_treatment(Agent("caucasian-male", proxy=proxy_config))),
-        apply_caucasian_treatment(apply_female_treatment(Agent("caucasian-female", proxy=proxy_config))),
-        apply_afam_treatment(apply_male_treatment(Agent("afam-male", proxy=proxy_config))),
-        apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
-        apply_hispanic_treatment(apply_male_treatment(Agent("hispanic-male", proxy=proxy_config))),
-        apply_hispanic_treatment(apply_female_treatment(Agent("hispanic-female", proxy=proxy_config))),
-        apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
-        apply_asian_treatment(apply_female_treatment(Agent("asian-female", proxy=proxy_config))),
+        # apply_caucasian_treatment(apply_female_treatment(Agent("caucasian-female", proxy=proxy_config))),
+        # apply_afam_treatment(apply_male_treatment(Agent("afam-male", proxy=proxy_config))),
+        # apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
+        # apply_hispanic_treatment(apply_male_treatment(Agent("hispanic-male", proxy=proxy_config))),
+        # apply_hispanic_treatment(apply_female_treatment(Agent("hispanic-female", proxy=proxy_config))),
+        # apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
+        # apply_asian_treatment(apply_female_treatment(Agent("asian-female", proxy=proxy_config))),
     ]
 
 
@@ -118,6 +118,7 @@ def main(output, agents, blocks, location, debug):
                     for _num in range(agents):
                         from auditor.settings import proxy_config
                         treatments.extend(generate_qc_agents(proxy_config=settings.proxy_config))
+                        log.info("Save agents to treatments list")
                         # treatments.extend(generate_single_site_agents(proxy_config=proxy_config))
                         # treatments.extend(generate_test_agent(proxy_config=proxy_config))
 
@@ -125,65 +126,36 @@ def main(output, agents, blocks, location, debug):
                     for treatment in treatments:
                         scrape_steps = {
                             'champaign': [
-                                # CNNAdScraper(delay=pos_int_norm(40, 12)),
-                                # CNNAdScraper(delay=pos_int_norm(40, 12)),
-                                # NewsGazetteAdScraper(),
-                                # NewsGazetteAdScraper(),
-                                # FoxChampaignScraper(),
-                                # FoxChampaignScraper(),
-                                # WCIAScraper(),
-                                # WCIAScraper(),
                                 GoogleSearchAdScraper('work from home jobs', delay=pos_int_norm(40, 12))
-                                # HomeFinderAdScraper('Urbana, IL', delay=pos_int_norm(40, 12)),
-                                # TruliaScraper('Champaign, IL', delay=pos_int_norm(600, 120)),
-                                # RealtorRanking('Champaign, IL', delay=10),
-                                # RedfinScraper('county/721/IL/Champaign-County', delay=300),
-                            ],
-                            'chicago': [
-                                # CNNAdScraper(),
-                                # CNNAdScraper(),
-                                # ChicagoReaderScraper(delay=pos_int_norm(40, 12)),
-                                # ChicagoReaderScraper(delay=pos_int_norm(40, 12)),
-                                # SunTimesAdScraper(),
-                                # SunTimesAdScraper(),
-                                # ChicagoTribuneScraper(),
-                                # ChicagoTribuneScraper(),
-                                GoogleSearchAdScraper('houses in chicago', delay=pos_int_norm(40, 12))
-                                # HomeFinderAdScraper('Chicago, IL', delay=pos_int_norm(40, 12)),
-                                # RealtorRanking('Chicago, IL', delay=300),
-                                # TruliaScraper('Chicago, IL', delay=pos_int_norm(600, 120)),
-                                # RedfinScraper('city/29470/IL/Chicago', delay=300),
-                            ],
-                            'atlanta': [
-                                RealtorRanking('Atlanta, GA', delay=300),
-                                TruliaScraper('Atlanta, GA', delay=pos_int_norm(600, 120)),
-                            ],
-                            'sacramento': [
-                                RealtorRanking('Sacramento, CA', delay=300),
-                                TruliaScraper('Sacramento, CA', delay=pos_int_norm(600, 120)),
-                            ],
+                            ]
                         }
-
                         treatment.scrape_steps.extend(scrape_steps[location])
+                        logger.info("Scrape steps - search on google for work for home jobs - added to treatment")
                     start_time = time.time()
+                    logger.info("Agent training steps are - ", treatments[0].training_steps)
+                    logger.info("Agent scraping steps are - ", treatments[0].scrape_steps)
+                    # 
                     while ((time.time() - start_time) < 86400):
-                    #for i in range(3):
-                        for agent in treatments:
-                            shuffle(agent.training_steps)
-                            shuffle(agent.scrape_steps)
+                        # for agent in treatments:
+                        #     shuffle(agent.training_steps)
+                        #     shuffle(agent.scrape_steps)
 
                         queue = Queue()
                         writer = AdWriter(output, queue)
 
-                        logger.info("Starting threads")
-                        threads = [Thread(target=unit.run, args=(writer.queue,)) for unit in treatments]
-                        for t in threads:
-                            t.start()
-                        writer.start()
-                        for t in threads:
-                            t.join()
-                        writer.queue.put(None)
-                        writer.join()
+                        # logger.info("Starting threads")
+                        # threads = [Thread(target=unit.run, args=(writer.queue,)) for unit in treatments]
+                        # for t in threads:
+                        #     t.start()
+                        # writer.start()
+                        # for t in threads:
+                        #     t.join()
+                        # writer.queue.put(None)
+                        # writer.join()
+
+                        # scrape step is search on google
+                        # train step is search websites
+                        treatments[0].run()
                 except Exception as ex:
                     print('Exception occurred: ', str(ex))
                 finally:
