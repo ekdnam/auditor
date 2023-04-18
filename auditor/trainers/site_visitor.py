@@ -27,7 +27,11 @@ class SiteVisitor(TrainingStep):
 
     def __call__(self, unit):
         driver: WebDriver = unit.driver
-        for urlx in self.site_list:
+        count = {}
+        site_list = self.site_list
+        for urlx in site_list:
+            count[urlx] = 0
+        for urlx in site_list:
             url: ParseResult = urlparse(urlx)
             if not url.scheme:
                 url = url._replace(scheme='https')
@@ -35,10 +39,14 @@ class SiteVisitor(TrainingStep):
                 if not connected_to_internet():
                     self.logger.info("Not connected to internet.")
                 print("Accessing URL: ", url.geturl())
+                count[urlx] += 1
                 unit.driver.get(url.geturl())
             except Exception as e:
                 self.logger.exception("Unexpected exception: Site %s", url.geturl())
                 self.logger.exception(e)
-                self.logger.info("Adding url back to list: ", urlx)
-                self.site_list.append(urlx)
+                if urlx in count:
+                    if count[urlx] < 3:
+                        site_list.append(urlx)
+                        count[urlx] += 1
+                        self.logger.info("Adding url back to list: ", urlx)
             time.sleep(self.delay)
