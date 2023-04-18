@@ -132,8 +132,8 @@ def main(output, agents, blocks, location, debug):
                         treatment.scrape_steps.extend(scrape_steps[location])
                         logger.info("Scrape steps - search on google for work for home jobs - added to treatment")
                     start_time = time.time()
-                    logger.info("Agent training steps are - ", treatments[0].training_steps)
-                    logger.info("Agent scraping steps are - ", treatments[0].scrape_steps)
+                    logger.info("Agent training steps are - ")
+                    logger.info("Agent scraping steps are - ")
                     # 
                     while ((time.time() - start_time) < 86400):
                         # for agent in treatments:
@@ -155,7 +155,7 @@ def main(output, agents, blocks, location, debug):
 
                         # scrape step is search on google
                         # train step is search websites
-                        treatments[0].run()
+                        treatments[0].run(queue=queue)
                 except Exception as ex:
                     print('Exception occurred: ', str(ex))
                 finally:
