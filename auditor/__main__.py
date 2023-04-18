@@ -115,12 +115,12 @@ def main(output, agents, blocks, location, debug):
                 logger.info("Creating agents")
 
                 try:
-                    for _num in range(agents):
-                        from auditor.settings import proxy_config
-                        treatments.extend(generate_qc_agents(proxy_config=settings.proxy_config))
-                        logger.info("Save agents to treatments list")
-                        # treatments.extend(generate_single_site_agents(proxy_config=proxy_config))
-                        # treatments.extend(generate_test_agent(proxy_config=proxy_config))
+#                     for _num in range(agents):
+#                         from auditor.settings import proxy_config
+#                         treatments.extend(generate_qc_agents(proxy_config=settings.proxy_config))
+#                         logger.info("Save agents to treatments list")
+#                         # treatments.extend(generate_single_site_agents(proxy_config=proxy_config))
+#                         # treatments.extend(generate_test_agent(proxy_config=proxy_config))
 
                     logger.info("Adding scrape steps")
                     for treatment in treatments:
