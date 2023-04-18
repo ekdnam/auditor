@@ -17,7 +17,7 @@ from auditor.agent import Agent
 from auditor.scrapers.advertisement.base_ad_scrapers import BaseAdScraper
 from auditor.scrapers.base_scraper import strip_html_tags
 
-INPUT_SELECTOR = "input[title='Search']"
+INPUT_SELECTOR = "input[type='submit']"
 
 import requests
 
