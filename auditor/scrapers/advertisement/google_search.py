@@ -51,10 +51,10 @@ class GoogleSearchAdScraper(BaseAdScraper):
 
         # with GoogleSearchAdScraper.scrape_lock:
         driver = unit.driver
-        time.sleep(self.delay)
+        # time.sleep(self.delay)
         try:
             driver.get("https://www.google.com/")
-            search_bar = driver.find_element_by_css_selector(INPUT_SELECTOR)
+            search_bar = driver.find_element_by_name("q")
             ActionChains(driver) \
                 .pause(1) \
                 .send_keys_to_element(search_bar, self.query) \
