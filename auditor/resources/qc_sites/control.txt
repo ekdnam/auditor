@@ -1,15 +1,1 @@
-amazon.com
-google.com
-facebook.com
-wikipedia.org
-twitter.com
-youtube.com
-ebay.com
-yahoo.com
-walmart.com
-quora.com
-craigslist.org
-nytimes.com
-paypal.com
-target.com
 bing.com

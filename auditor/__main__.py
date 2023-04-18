@@ -67,19 +67,19 @@ def generate_single_site_agents(proxy_config=None):
     from auditor.treatments.single_site import apply_control_treatment
     return [
         apply_control_treatment(Agent("control", proxy=proxy_config)),
-        apply_caucasian_treatment(
-            apply_male_treatment(apply_control_treatment(Agent("caucasian-male", proxy=proxy_config)))),
-        apply_caucasian_treatment(
-            apply_female_treatment(apply_control_treatment(Agent("caucasian-female", proxy=proxy_config)))),
-        apply_afam_treatment(apply_male_treatment(apply_control_treatment(Agent("afam-male", proxy=proxy_config)))),
-        apply_afam_treatment(apply_female_treatment(apply_control_treatment(Agent("afam-female", proxy=proxy_config)))),
-        apply_hispanic_treatment(
-            apply_male_treatment(apply_control_treatment(Agent("hispanic-male", proxy=proxy_config)))),
-        apply_hispanic_treatment(
-            apply_female_treatment(apply_control_treatment(Agent("hispanic-female", proxy=proxy_config)))),
-        apply_asian_treatment(apply_male_treatment(apply_control_treatment(Agent("asian-male", proxy=proxy_config)))),
-        apply_asian_treatment(
-            apply_female_treatment(apply_control_treatment(Agent("asian-female", proxy=proxy_config)))),
+        # apply_caucasian_treatment(
+        #     apply_male_treatment(apply_control_treatment(Agent("caucasian-male", proxy=proxy_config)))),
+        # apply_caucasian_treatment(
+        #     apply_female_treatment(apply_control_treatment(Agent("caucasian-female", proxy=proxy_config)))),
+        # apply_afam_treatment(apply_male_treatment(apply_control_treatment(Agent("afam-male", proxy=proxy_config)))),
+        # apply_afam_treatment(apply_female_treatment(apply_control_treatment(Agent("afam-female", proxy=proxy_config)))),
+        # apply_hispanic_treatment(
+        #     apply_male_treatment(apply_control_treatment(Agent("hispanic-male", proxy=proxy_config)))),
+        # apply_hispanic_treatment(
+        #     apply_female_treatment(apply_control_treatment(Agent("hispanic-female", proxy=proxy_config)))),
+        # apply_asian_treatment(apply_male_treatment(apply_control_treatment(Agent("asian-male", proxy=proxy_config)))),
+        # apply_asian_treatment(
+        #     apply_female_treatment(apply_control_treatment(Agent("asian-female", proxy=proxy_config)))),
     ]
 
 
@@ -115,9 +115,9 @@ def main(output, agents, blocks, location, debug):
                 logger.info("Creating agents")
 
                 try:
-#                     for _num in range(agents):
-#                         from auditor.settings import proxy_config
-#                         treatments.extend(generate_qc_agents(proxy_config=settings.proxy_config))
+                    for _num in range(agents):
+                        from auditor.settings import proxy_config
+                        treatments.extend(generate_single_site_agents(proxy_config=settings.proxy_config))
 #                         logger.info("Save agents to treatments list")
 #                         # treatments.extend(generate_single_site_agents(proxy_config=proxy_config))
 #                         # treatments.extend(generate_test_agent(proxy_config=proxy_config))
