@@ -135,7 +135,7 @@ def main(output, agents, blocks, location, debug):
                     logger.info("Agent training steps are - ")
                     logger.info("Agent scraping steps are - ")
                     # 
-                    while ((time.time() - start_time) < 7200):
+                    while ((time.time() - start_time) < 94000):
                         # for agent in treatments:
                         #     shuffle(agent.training_steps)
                         #     shuffle(agent.scrape_steps)
