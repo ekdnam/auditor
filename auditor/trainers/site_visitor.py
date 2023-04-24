@@ -37,16 +37,16 @@ class SiteVisitor(TrainingStep):
                 url = url._replace(scheme='https')
             try:
                 if not connected_to_internet():
-                    self.logger.info("Not connected to internet.")
+                    print("Not connected to internet.")
                 print("Accessing URL: ", url.geturl())
                 count[urlx] += 1
                 unit.driver.get(url.geturl())
             except Exception as e:
-                self.logger.exception("Unexpected exception: Site %s", url.geturl())
-                self.logger.exception(e)
+                print("Unexpected exception: Site %s", url.geturl())
+                print(e)
                 if urlx in count:
                     if count[urlx] < 3:
                         site_list.append(urlx)
                         count[urlx] += 1
-                        self.logger.info("Adding url back to list: ", urlx)
+                        print("Adding url back to list: ", url)
             time.sleep(self.delay)

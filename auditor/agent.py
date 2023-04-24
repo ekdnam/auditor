@@ -94,11 +94,11 @@ class Agent(object):
         :param queue:
         :return: None
         """
-        self.logger.info("Started training steps")
+        print("Started training steps")
         for step in self.training_steps:
             step(self)
 
-        self.logger.info("Started scraping")
+        print("Started scraping")
         for step in self.scrape_steps:
             step(self, queue)
 

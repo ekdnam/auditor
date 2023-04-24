@@ -118,18 +118,15 @@ def main(output, agents, blocks, location, debug):
     with Xvfb(width=1280, height=740) as xvfb:
         try:
             for block in range(blocks):
-                logger.info("Starting block %s", block)
-                logger.info("Creating agents")
+                print("Starting block %s", block)
+                print("Creating agents")
 
                 try:
                     for _num in range(agents):
                         from auditor.settings import proxy_config
                         treatments.extend(generate_qc_agents(proxy_config=settings.proxy_config))
-#                         logger.info("Save agents to treatments list")
-#                         # treatments.extend(generate_single_site_agents(proxy_config=proxy_config))
-#                         # treatments.extend(generate_test_agent(proxy_config=proxy_config))
 
-                    logger.info("Adding scrape steps")
+                    print("Adding scrape steps")
                     for treatment in treatments:
                         scrape_steps = {
                             'champaign': [
@@ -137,10 +134,10 @@ def main(output, agents, blocks, location, debug):
                             ]
                         }
                         treatment.scrape_steps.extend(scrape_steps[location])
-                        logger.info("Scrape steps - search on google for work for home jobs - added to treatment")
+                        print("Scrape steps - search on google for work for home jobs - added to treatment")
                     start_time = time.time()
-                    logger.info("Agent training steps are - ")
-                    logger.info("Agent scraping steps are - ")
+                    print("Agent training steps are - ")
+                    print("Agent scraping steps are - ")
                     # 
                     while ((time.time() - start_time) < 94000):
                         queue = Queue()
@@ -153,9 +150,9 @@ def main(output, agents, blocks, location, debug):
                 finally:
                     for treatment in treatments:
                         treatment.driver.quit()
-                    logger.info("Completed block %s", block)
+                    print("Completed block %s", block)
             print('Experiment completed successfully')
-            logger.info("Completed measurement")
+            print("Completed measurement")
         except (Exception, KeyboardInterrupt):
             try:
                 for treatment in treatments:
