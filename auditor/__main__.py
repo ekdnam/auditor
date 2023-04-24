@@ -82,6 +82,11 @@ def generate_single_site_agents(proxy_config=None):
         #     apply_female_treatment(apply_control_treatment(Agent("asian-female", proxy=proxy_config)))),
     ]
 
+class TimestampFormatter(logging.Formatter):
+    def format(self, record):
+        current_time = datetime.datetime.now()
+        time_string = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        return f"[{time_string}] {super().format(record)}"
 
 @click.command()
 @click.option('-o', '--output', help='File to send output to', type=click.Path(exists=False))
@@ -100,7 +105,6 @@ def main(output, agents, blocks, location, debug):
     logging.basicConfig(
         level=log_level,
         handlers=[
-            logging.FileHandler(f"output/{datetime.now()}.log"),
             logging.StreamHandler(),
         ],
     format='%(asctime)s.%(msecs)03d %(levelname)s %(module)s - %(funcName)s: %(message)s',
@@ -108,6 +112,9 @@ def main(output, agents, blocks, location, debug):
     )
     logging.getLogger("selenium.webdriver").setLevel(logging.WARNING)
     logger = logging.getLogger(__name__)
+    handler = logging.StreamHandler()
+    handler.setFormatter(TimestampFormatter())
+    logger.addHandler(handler)
 
     treatments: List[Agent] = list()
     with Xvfb(width=1280, height=740) as xvfb:
