@@ -91,7 +91,7 @@ def generate_single_site_agents(proxy_config=None):
 @click.option('-v', '--debug', is_flag=True)
 def main(output, agents, blocks, location, debug):
     os.makedirs("output/failures", exist_ok=True)
-
+    debug=True
     if debug:
         log_level = logging.DEBUG
     else:
