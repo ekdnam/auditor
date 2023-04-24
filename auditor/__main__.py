@@ -102,14 +102,12 @@ def main(output, agents, blocks, location, debug):
     else:
         log_level = logging.INFO
 
-    logging.basicConfig(
-        level=log_level,
-        handlers=[
-            logging.StreamHandler(),
-        ],
-    format='%(asctime)s.%(msecs)03d %(levelname)s %(module)s - %(funcName)s: %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    )
+    # logging.basicConfig(
+    #     level=log_level,
+    #     handlers=[
+    #         logging.StreamHandler(),
+    #     ],
+    # )
     logging.getLogger("selenium.webdriver").setLevel(logging.WARNING)
     logger = logging.getLogger(__name__)
     handler = logging.StreamHandler()

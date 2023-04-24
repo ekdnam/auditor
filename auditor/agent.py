@@ -44,8 +44,9 @@ class Agent(object):
         options = FirefoxOptions()
         options.log.level = 'error'
         options.headless = headless
-
-        self.driver: WebDriver = webdriver.Firefox(firefox_options=options, proxy=self.proxy)
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference('browser.cache.offline.enable', True)
+        self.driver: WebDriver = webdriver.Firefox(firefox_options=options, proxy=self.proxy, firefox_profile=profile)
         self.driver.set_page_load_timeout(60)
 
     @property
