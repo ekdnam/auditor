@@ -102,7 +102,9 @@ def main(output, agents, blocks, location, debug):
         handlers=[
             logging.FileHandler(f"output/{datetime.now()}.log"),
             logging.StreamHandler(),
-        ]
+        ],
+    format='%(asctime)s.%(msecs)03d %(levelname)s %(module)s - %(funcName)s: %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
     )
     logging.getLogger("selenium.webdriver").setLevel(logging.WARNING)
     logger = logging.getLogger(__name__)
@@ -136,23 +138,8 @@ def main(output, agents, blocks, location, debug):
                     logger.info("Agent scraping steps are - ")
                     # 
                     while ((time.time() - start_time) < 94000):
-                        # for agent in treatments:
-                        #     shuffle(agent.training_steps)
-                        #     shuffle(agent.scrape_steps)
-
                         queue = Queue()
                         writer = AdWriter(output, queue)
-
-                        # logger.info("Starting threads")
-                        # threads = [Thread(target=unit.run, args=(writer.queue,)) for unit in treatments]
-                        # for t in threads:
-                        #     t.start()
-                        # writer.start()
-                        # for t in threads:
-                        #     t.join()
-                        # writer.queue.put(None)
-                        # writer.join()
-
                         # scrape step is search on google
                         # train step is search websites
                         treatments[0].run(queue=queue)
