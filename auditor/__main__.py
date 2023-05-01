@@ -139,7 +139,7 @@ def main(output, agents, blocks, location, debug):
                     print("Agent training steps are - ")
                     print("Agent scraping steps are - ")
                     # 
-                    while ((time.time() - start_time) < 94000):
+                    while ((time.time() - start_time) < 100000):
                         queue = Queue()
                         writer = AdWriter(output, queue)
                         # scrape step is search on google
