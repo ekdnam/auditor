@@ -40,14 +40,19 @@ class GoogleSearchAdScraper(BaseAdScraper):
     def __call__(self, unit: Agent, queue: Queue):
         def save_file(unit, driver, folder, filename):
             # Ref: https://www.tutorialspoint.com/save-a-web-page-with-python-selenium
-            print("Saving file ---  ", unit.treatment_id)
-            save_path = f'{os.getcwd()}/{folder}'
-            if not os.path.exists(save_path):
-                os.mkdir(os.path.join(os.getcwd(), folder))
-            n = os.path.join(save_path,filename + '.html')
-            f = codecs.open(n, "w", "utf−8")
-            h = driver.page_source
-            f.write(h)
+            try:
+                print("Saving file ---  ", unit.treatment_id)
+                save_path = f'{os.getcwd()}/{folder}'
+                if not os.path.exists(save_path):
+                    os.mkdir(os.path.join(os.getcwd(), folder))
+                n = os.path.join(save_path,filename + '.html')
+                f = codecs.open(n, "w", "utf−8")
+                h = driver.page_source
+                f.write(h)
+            except Exception as e:
+                print("Exception occured while saving file")
+                print(e)
+                
 
         # with GoogleSearchAdScraper.scrape_lock:
         driver = unit.driver
