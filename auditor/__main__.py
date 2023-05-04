@@ -47,8 +47,8 @@ def generate_qc_agents(proxy_config=None):
         # apply_afam_treatment(apply_female_treatment(Agent("afam-female", proxy=proxy_config))),
         # apply_hispanic_treatment(apply_male_treatment(Agent("hispanic-male", proxy=proxy_config))),
         # apply_hispanic_treatment(apply_female_treatment(Agent("hispanic-female", proxy=proxy_config))),
-        # apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
-        apply_asian_treatment(apply_female_treatment(Agent("asian-female", proxy=proxy_config))),
+        apply_asian_treatment(apply_male_treatment(Agent("asian-male", proxy=proxy_config))),
+        # apply_asian_treatment(apply_female_treatment(Agent("asian-female", proxy=proxy_config))),
     ]
 
 
@@ -139,7 +139,7 @@ def main(output, agents, blocks, location, debug):
                     print("Agent training steps are - ")
                     print("Agent scraping steps are - ")
                     # 
-                    while ((time.time() - start_time) < 94000):
+                    while ((time.time() - start_time) < 100000):
                         queue = Queue()
                         writer = AdWriter(output, queue)
                         # scrape step is search on google
